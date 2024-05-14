@@ -37,16 +37,16 @@ function Home() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.home}>
       <h1>Tudo sobre cartas de Yu Gi Oh</h1>
 
       <Search searchCard={searchCard} />
 
-      <div>
+      <div className={styles.container_cards}>
         {cards &&
           cards.length > 0 &&
           cards.map((card: Card) => (
-            <div key={card.name}>
+            <div key={card.name} className={styles.card_data}>
               <img
                 src={card.card_images[0].image_url_small}
                 alt="card-image"
