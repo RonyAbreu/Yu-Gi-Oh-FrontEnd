@@ -9,7 +9,7 @@ function Search({searchCard} : SearchProps) {
   const [cardName, setCardName] = useState("");
 
   return (
-    <div>
+    <div className={styles.search}>
       <input
         type="text"
         placeholder="Digite o nome de uma carta"
