@@ -1,5 +1,9 @@
 .home {
   padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .home_header{
@@ -38,6 +42,21 @@
   height: 100%;
   background: linear-gradient(90deg, #d0d0d0 50%, #e0e0e0 50%);
   animation: loadingAnimation infinite;
+}
+
+.home_main{
+  display: flex;
+  gap: 1.5em;
+}
+
+.not_found{
+  text-align: center;
+  background-color: #fff;
+  color: #000;
+  font-size: 2em;
+  font-weight: bold;
+  padding: 10px;
+  margin-top: 1.5em;
 }
 
 @keyframes loadingAnimation {

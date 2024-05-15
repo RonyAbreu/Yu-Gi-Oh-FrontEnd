@@ -4,6 +4,7 @@ import styles from "./Home.module.css";
 import { apiFetch } from "../../axios/config";
 import { useEffect, useState } from "react";
 import { Card } from "../../types/card";
+import Filter from "../../components/filter/Filter";
 
 function Home() {
   const [cards, setCards] = useState<Card[] | null | []>(null);
@@ -47,10 +48,8 @@ function Home() {
         <Search searchCard={searchCard} />
       </div>
 
-      <div className="home_main">
-        <div className="home_filter">
-
-        </div>
+      <div className={styles.home_main}>
+        <Filter />
 
         <div className="home_data">
           {loading && (
@@ -64,7 +63,7 @@ function Home() {
           )}
 
           {!loading && cards && cards.length === 0 && (
-            <p>Nenhuma carta foi encontrada</p>
+            <p className={styles.not_found}>Nenhuma carta foi encontrada</p>
           )}
 
           {!loading && cards && cards.length > 0 && (
