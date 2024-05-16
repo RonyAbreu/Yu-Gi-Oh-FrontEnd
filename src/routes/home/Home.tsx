@@ -58,7 +58,7 @@ function Home() {
       </div>
 
       <div className={styles.home_main}>
-        <Filter />
+        {!loading && <Filter />}
 
         <div className={styles.home_data}>
           {!loading && cards && cards.length > 0 && (
@@ -84,7 +84,7 @@ function Home() {
 
       </div>
 
-      <Pagination quantPages={pages} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
+      <Pagination quantPages={pages} setCurrentPage={setCurrentPage} currentPage={currentPage} setLoading={setLoading}/>
 
       {loading && <Loading />}
     </div>

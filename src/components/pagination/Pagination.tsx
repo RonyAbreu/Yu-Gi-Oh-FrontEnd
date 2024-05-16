@@ -4,10 +4,15 @@ interface PaginationProps {
   quantPages: number;
   currentPage: number;
   setCurrentPage: (page: number) => void;
+  setLoading: (isLoading: boolean) => void;
 }
 
-function Pagination({ quantPages, currentPage, setCurrentPage }: PaginationProps) {
-
+function Pagination({
+  quantPages,
+  currentPage,
+  setCurrentPage,
+  setLoading,
+}: PaginationProps) {
   const calculatePages = () => {
     const pageButtons = [];
     const maxPagesToShow = 5;
@@ -33,8 +38,12 @@ function Pagination({ quantPages, currentPage, setCurrentPage }: PaginationProps
       pageButtons.push(
         <button
           key={i}
-          className={currentPage === i ? styles.active : ""}
-          onClick={() => setCurrentPage(i)}
+          className={
+            currentPage === i
+              ? styles.active + " " + styles.pagination_button
+              : styles.pagination_button
+          }
+          onClick={() => handleClick(i)}
         >
           {i + 1}
         </button>
@@ -44,12 +53,35 @@ function Pagination({ quantPages, currentPage, setCurrentPage }: PaginationProps
     return pageButtons;
   };
 
+  function handleClick(page: number) {
+    setLoading(true);
+    setTimeout(() => {
+      setCurrentPage(page);
+      window.scrollTo(0, 0);
+      setLoading(false);
+    }, 500);
+  }
+
   return (
     <div className={styles.pagination}>
-      {currentPage > 0 && <button onClick={() => setCurrentPage(0)}>Primeira</button>}
+      {currentPage > 0 && (
+        <button
+          className={styles.pagination_button}
+          onClick={() => handleClick(0)}
+        >
+          Primeira
+        </button>
+      )}
       {calculatePages()}
       {currentPage < quantPages - 1 && <span>...</span>}
-      {currentPage < quantPages - 1 && <button onClick={() => setCurrentPage(quantPages -1)}>Última</button>}
+      {currentPage < quantPages - 1 && (
+        <button
+          className={styles.pagination_button}
+          onClick={() => handleClick(quantPages - 1)}
+        >
+          Última
+        </button>
+      )}
     </div>
   );
 }

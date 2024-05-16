@@ -5,7 +5,7 @@
   margin-top: 3em;
 }
 
-.pagination button {
+.pagination_button {
   height: 40px;
   background-color: #007bff;
   color: #fff;
@@ -16,13 +16,18 @@
   border-radius: 5px;
   font-size: 1em;
   font-weight: bold;
+  opacity: .8;
 }
 
 .pagination button:hover {
-  background-color: #0056b3;
+  opacity: 1;
 }
 
 .pagination span {
   margin: 0 5px;
   font-weight: bold;
+}
+
+.active {
+  background-color: #000;
 }
