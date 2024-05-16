@@ -6,10 +6,13 @@ import { Card } from "../../types/card";
 import Filter from "../../components/filter/Filter";
 import Loading from "../../components/loading/Loading";
 import Pagination from "../../components/pagination/Pagination";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [cards, setCards] = useState<Card[] | []>([]);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const itensPerPage: number = 30;
   const [currentPage, setCurrentPage] = useState(0);
@@ -59,11 +62,6 @@ function Home() {
     }
   }
 
-  function showCardDetails(cardId: number){
-
-  }
-
-
   return (
     <div className={styles.home}>
       <div className={styles.home_header}>
@@ -78,7 +76,7 @@ function Home() {
           {!loading && cards && cards.length > 0 && (
             <div className={styles.container_cards}>
               {currentItens.map((card: Card) => (
-                <div key={card.id} className={styles.card_data} onClick={() => showCardDetails(card.id)}>
+                <div key={card.id} className={styles.card_data} onClick={() => navigate(`/card/${card.id}`)}>
                   <img
                     src={card.card_images[0].image_url_small}
                     alt="card-image"

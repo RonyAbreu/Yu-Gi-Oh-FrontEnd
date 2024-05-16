@@ -1,8 +1,10 @@
+import { useParams } from 'react-router-dom'
 import styles from './Card.module.css'
 
 function CardInfo() {
+  const {id} = useParams();
   return (
-    <div>CardInfo</div>
+    <div>CardInfo {id}</div>
   )
 }
 

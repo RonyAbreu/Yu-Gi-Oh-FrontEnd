@@ -38,6 +38,12 @@
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
+    transition: .2s ease-in-out;
+}
+
+.filter_button:hover {
+    background-color: #fff;
+    color: #007bff;
 }
 
 @media(max-width: 950px){
