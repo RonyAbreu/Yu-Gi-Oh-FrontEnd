@@ -11,7 +11,7 @@ function Home() {
   const [cards, setCards] = useState<Card[] | []>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const itensPerPage: number = 60;
+  const itensPerPage: number = 30;
   const [currentPage, setCurrentPage] = useState(0);
 
   const pages: number = Math.ceil(cards!.length / itensPerPage);
@@ -20,24 +20,13 @@ function Home() {
 
   const currentItens: Array<Card> = cards!.slice(startIndex, endIndex);
 
-  async function searchCard(cardName: string) {
-    try {
-      setLoading(true);
-      const response = await apiFetch.get(`?fname=${cardName}`);
-      const cardsJson = response.data.data;
-      setCards(cardsJson);
-    } catch (error) {
-      setCards([]);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const [baseUrl, setBaseUrl] = useState("");
 
   useEffect(() => {
     async function getAllCards() {
       try {
         setLoading(true);
-        const response = await apiFetch.get("");
+        const response = await apiFetch.get(baseUrl);
         const cardsJson = response.data.data;
         setCards(cardsJson);
       } catch (error) {
@@ -48,7 +37,32 @@ function Home() {
     }
 
     getAllCards();
-  }, []);
+  }, [baseUrl]);
+  
+  async function searchCard(cardName: string) {
+    let searchUrl: string;
+    if(baseUrl != ""){
+      searchUrl = baseUrl.concat("&");
+    } else {
+      searchUrl = baseUrl.concat("?");
+    }
+
+    try {
+      setLoading(true);
+      const response = await apiFetch.get(`${searchUrl}fname=${cardName}`);
+      const cardsJson = response.data.data;
+      setCards(cardsJson);
+    } catch (error) {
+      setCards([]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function showCardDetails(cardId: number){
+
+  }
+
 
   return (
     <div className={styles.home}>
@@ -58,13 +72,13 @@ function Home() {
       </div>
 
       <div className={styles.home_main}>
-        {!loading && <Filter />}
+        <Filter setBaseUrl={setBaseUrl}/>
 
         <div className={styles.home_data}>
           {!loading && cards && cards.length > 0 && (
             <div className={styles.container_cards}>
               {currentItens.map((card: Card) => (
-                <div key={card.name} className={styles.card_data}>
+                <div key={card.id} className={styles.card_data} onClick={() => showCardDetails(card.id)}>
                   <img
                     src={card.card_images[0].image_url_small}
                     alt="card-image"
@@ -81,7 +95,6 @@ function Home() {
             <p className={styles.not_found}>Nenhuma carta foi encontrada</p>
           )}
         </div>
-
       </div>
 
       <Pagination quantPages={pages} setCurrentPage={setCurrentPage} currentPage={currentPage} setLoading={setLoading}/>
