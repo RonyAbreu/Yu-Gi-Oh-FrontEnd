@@ -1,0 +1,29 @@
+.filter{
+    display: flex;
+    flex: 1;
+    padding: 10px;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.filter_component{
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: .7em;
+}
+
+.filter_component span{
+    font-size: 1.1em;
+}
+
+.filter_component input,
+.filter_component select{
+    height: 30px;
+    padding: 5px;
+    font-size: 1em;
+}

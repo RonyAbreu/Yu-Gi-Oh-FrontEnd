@@ -15,6 +15,7 @@ function Search({searchCard} : SearchProps) {
         placeholder="Digite o nome de uma carta"
         value={cardName}
         onChange={(e) => setCardName(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" ? searchCard(cardName) : ""}
       />
       <button onClick={() => searchCard(cardName)}>Buscar</button>
     </div>
