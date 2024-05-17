@@ -84,6 +84,9 @@ function Home() {
                     height="280"
                     loading="lazy"
                   />
+                  <div className={styles.card_info}>
+                    <p>R${card.card_prices[0].amazon_price == 0 ? 1.50 : card.card_prices[0].amazon_price}</p>
+                  </div>
                 </div>
               ))}
             </div>

@@ -5,6 +5,7 @@ export interface Card {
     attribute: string;
     desc: string;
     card_images: CardImages[];
+    card_prices: CardPrice[];
     atk: number;
     def: number;
     level: number;
@@ -12,4 +13,8 @@ export interface Card {
 
 interface CardImages {
     image_url_small : string;
+}
+
+interface CardPrice {
+    amazon_price : number;
 }

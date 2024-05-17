@@ -37,6 +37,18 @@ function CardInfo() {
     return arrayStar;
   }
 
+  const [quantity, setQuantity] = useState<number>(1);
+
+  const increaseQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    setQuantity((prevQuantity) =>
+      prevQuantity > 1 ? prevQuantity - 1 : 1
+    );
+  };
+
   return (
     <div className={styles.container_card}>
       {cards &&
@@ -52,14 +64,18 @@ function CardInfo() {
                   <span>Type</span>
                   <p>{card.type}</p>
                 </div>
-                {card.attribute && <div className={styles.stats}>
-                  <span>Attribute</span>
-                  <p>{card.attribute}</p>
-                </div>}
-                {card.level && <div className={styles.stats}>
-                  <span>Level</span>
-                  <p className={styles.stars}>{showStars(card.level)}</p>
-                </div>}
+                {card.attribute && (
+                  <div className={styles.stats}>
+                    <span>Attribute</span>
+                    <p>{card.attribute}</p>
+                  </div>
+                )}
+                {card.level && (
+                  <div className={styles.stats}>
+                    <span>Level</span>
+                    <p className={styles.stars}>{showStars(card.level)}</p>
+                  </div>
+                )}
               </div>
 
               <div className={styles.description}>
@@ -69,14 +85,38 @@ function CardInfo() {
               </div>
 
               <div className={styles.card_attributes}>
-                {(card.atk || card.atk == 0) && <div className={styles.attributes} id={styles.atk}>
-                  <span>Atk</span>
-                  <p>{card.atk}</p>
-                </div>}
-                {(card.def || card.def == 0) && <div className={styles.attributes} id={styles.def}>
-                  <span>Def</span>
-                  <p>{card.def}</p>
-                </div>}
+                {(card.atk || card.atk == 0) && (
+                  <div className={styles.attributes} id={styles.atk}>
+                    <span>Atk</span>
+                    <p>{card.atk}</p>
+                  </div>
+                )}
+                {(card.def || card.def == 0) && (
+                  <div className={styles.attributes} id={styles.def}>
+                    <span>Def</span>
+                    <p>{card.def}</p>
+                  </div>
+                )}
+              </div>
+
+              <div className={styles.card_value}>
+                <p>R${card.card_prices[0].amazon_price == 0 ? 1.50 : card.card_prices[0].amazon_price}</p>
+                <div className={styles.quantity_control}>
+                  <button type="button" onClick={decreaseQuantity}>
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    name="quantity"
+                    value={quantity}
+                    onChange={(e) => setQuantity(Number(e.target.value))}
+                    disabled={true}
+                  />
+                  <button type="button" onClick={increaseQuantity}>
+                    +
+                  </button>
+                </div>
+                <button className={styles.buy_button}>Comprar</button>
               </div>
             </div>
           </div>
