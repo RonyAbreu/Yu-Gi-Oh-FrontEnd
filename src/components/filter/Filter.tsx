@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styles from "./Filter.module.css";
+import { CardType } from "../../enum/CardType";
+import { CardAttribute } from "../../enum/CardAttribute";
 
 interface FilterProps {
   setBaseUrl: (baseUrl: string) => void;
@@ -8,64 +10,96 @@ interface FilterProps {
 function Filter({ setBaseUrl }: FilterProps) {
   const [level, setLevel] = useState("");
   const [attribute, setAttribute] = useState("");
+  const [type, setType] = useState("");
 
-  function filterCards(level : string, attribute : string){
-    if(level != "" && attribute == ""){
-      setBaseUrl(`?level=${level}`)
-    } else if(level == "" && attribute != ""){
-      setBaseUrl(`?attribute=${attribute}`)
-    } else if(level != "" && attribute != ""){
-      setBaseUrl(`?level=${level}&attribute=${attribute}`)
-    } else {
-      setBaseUrl(" ")
+  function filterCards(level: string, attribute: string, type: string) {
+    const params = new URLSearchParams();
+
+    if (level !== "") {
+      params.append("level", level);
     }
+    if (attribute !== "") {
+      params.append("attribute", attribute);
+    }
+    if (type !== "") {
+      params.append("type", type);
+    }
+
+    setBaseUrl(params.toString() ? `?${params.toString()}` : " ");
   }
 
-  function clearInputs(){
+  function clearInputs() {
     setLevel("");
     setAttribute("");
-    filterCards("", "");
+    setType("");
+    filterCards("", "", "");
+  }
+
+  function generateOptionTypes() {
+    return Object.values(CardType).map(type => (
+      <option key={type} value={type}>{type}</option>
+    ));
+  }
+
+  function generateAttributeOptions() {
+    return Object.entries(CardAttribute).map(([key, value]) => (
+      <option key={key} value={key}>{value}</option>
+    ));
   }
 
   return (
     <div className={styles.filter}>
       <div className={styles.filter_component}>
         <span>Level</span>
-        <select name="level" onChange={(e) => setLevel(e.target.value)} value={level}>
+        <select
+          name="level"
+          onChange={(e) => setLevel(e.target.value)}
+          value={level}
+        >
           <option value="">Todos</option>
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-          <option value="13">13</option>
+          {[...Array(14).keys()].map(i => (
+            <option key={i} value={i}>{i}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className={styles.filter_component}>
+        <span>Tipo</span>
+        <select
+          name="type"
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+        >
+          <option value="">Todos</option>
+          {generateOptionTypes()}
         </select>
       </div>
 
       <div className={styles.filter_component}>
         <span>Atributo</span>
-        <select name="attribute" onChange={(e) => setAttribute(e.target.value)} value={attribute}>
+        <select
+          name="attribute"
+          onChange={(e) => setAttribute(e.target.value)}
+          value={attribute}
+        >
           <option value="">Todos</option>
-          <option value="DARK">Trevas</option>
-          <option value="EARTH">Terra</option>
-          <option value="FIRE">Fogo</option>
-          <option value="LIGHT">Luz</option>
-          <option value="WATER">Água</option>
-          <option value="WIND">Vento</option>
-          <option value="DIVINE">Divino</option>
+          {generateAttributeOptions()}
         </select>
       </div>
 
-      <button onClick={() => filterCards(level, attribute)} className={styles.filter_button}>Filtrar</button>
-      <button onClick={clearInputs} className={styles.filter_button} id={styles.clear_btn}>Limpar</button>
+      <button
+        onClick={() => filterCards(level, attribute, type)}
+        className={styles.filter_button}
+      >
+        Filtrar
+      </button>
+      <button
+        onClick={clearInputs}
+        className={styles.filter_button}
+        id={styles.clear_btn}
+      >
+        Limpar
+      </button>
     </div>
   );
 }

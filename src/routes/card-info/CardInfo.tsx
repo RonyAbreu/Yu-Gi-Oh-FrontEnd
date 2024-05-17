@@ -52,14 +52,14 @@ function CardInfo() {
                   <span>Type</span>
                   <p>{card.type}</p>
                 </div>
-                <div className={styles.stats}>
+                {card.attribute && <div className={styles.stats}>
                   <span>Attribute</span>
                   <p>{card.attribute}</p>
-                </div>
-                <div className={styles.stats}>
+                </div>}
+                {card.level && <div className={styles.stats}>
                   <span>Level</span>
                   <p className={styles.stars}>{showStars(card.level)}</p>
-                </div>
+                </div>}
               </div>
 
               <div className={styles.description}>
@@ -69,14 +69,14 @@ function CardInfo() {
               </div>
 
               <div className={styles.card_attributes}>
-                <div className={styles.attributes} id={styles.atk}>
+                {(card.atk || card.atk == 0) && <div className={styles.attributes} id={styles.atk}>
                   <span>Atk</span>
                   <p>{card.atk}</p>
-                </div>
-                <div className={styles.attributes} id={styles.def}>
+                </div>}
+                {(card.def || card.def == 0) && <div className={styles.attributes} id={styles.def}>
                   <span>Def</span>
                   <p>{card.def}</p>
-                </div>
+                </div>}
               </div>
             </div>
           </div>
