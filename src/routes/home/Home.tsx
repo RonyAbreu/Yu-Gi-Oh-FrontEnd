@@ -33,7 +33,7 @@ function Home() {
         const cardsJson = response.data.data;
         setCards(cardsJson);
       } catch (error) {
-        console.log(error);
+        setCards([]);
       } finally {
         setLoading(false);
       }
@@ -65,7 +65,7 @@ function Home() {
   return (
     <div className={styles.home}>
       <div className={styles.home_header}>
-        <h1>Tudo sobre cartas de Yu Gi Oh</h1>
+        <h1>Yu-Gi-Oh Shop</h1>
         <Search searchCard={searchCard} />
       </div>
 

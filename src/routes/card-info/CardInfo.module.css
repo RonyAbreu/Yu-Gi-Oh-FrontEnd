@@ -10,7 +10,7 @@
 }
 
 .card_info {
-  width: 100%;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,7 +73,9 @@
 }
 
 .stars {
+  width: 100%;
   display: flex;
+  flex-wrap: wrap;
   gap: 0.2em;
   color: #ffd700;
 }

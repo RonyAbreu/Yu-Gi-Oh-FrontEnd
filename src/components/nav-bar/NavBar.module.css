@@ -1,9 +1,48 @@
-.nav_bar{
-    background-color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1em 3em;
-    margin-bottom: 1em;
-    cursor: pointer;
+.no_scroll {
+  overflow: hidden;
+}
+
+.nav_bar {
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em 3em;
+  margin-bottom: 1em;
+  position: relative;
+  height: 120px;
+}
+
+.nav_bar img {
+  cursor: pointer;
+  width: 180px;
+  height: 70px;
+}
+
+.container_cart {
+  position: absolute;
+  top: 40px;
+  right: 30px;
+  cursor: pointer;
+}
+
+.cart {
+  font-size: 2.5em;
+  position: relative;
+}
+
+.count_itens {
+  min-width: 15px;
+  min-height: 15px;
+  background-color: red;
+  border-radius: 50%;
+  font-size: 0.7em;
+  position: absolute;
+  text-align: center;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -8px;
+  right: -8px;
 }
