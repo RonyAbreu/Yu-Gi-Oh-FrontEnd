@@ -4,19 +4,24 @@ import { ReactElement, useEffect, useState } from "react";
 import { Card } from "../../types/card";
 import { apiFetch } from "../../axios/config";
 import { FaStar } from "react-icons/fa";
+import Loading from "../../components/loading/Loading";
 
 function CardInfo() {
   const { name } = useParams();
 
   const [cards, setCards] = useState<Card[]>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     async function getCard() {
       try {
+        setLoading(true);
         const response = await apiFetch.get(`?name=${name}`);
         const cardData = response.data.data;
+        setLoading(false);
         setCards(cardData);
       } catch (error) {
+        setLoading(false);
         console.log(error);
       }
     }
@@ -27,7 +32,7 @@ function CardInfo() {
   function showStars(level: number): ReactElement[] {
     const arrayStar: ReactElement[] = [];
     for (let i = 0; i < level; i++) {
-      arrayStar.push(<FaStar key={i}/>);
+      arrayStar.push(<FaStar key={i} />);
     }
     return arrayStar;
   }
@@ -57,7 +62,11 @@ function CardInfo() {
                 </div>
               </div>
 
-              <span className={styles.description}>Description: <br/> <br/>{card.desc}</span>
+              <div className={styles.description}>
+                <p>Description:</p>
+                <hr />
+                <span>{card.desc}</span>
+              </div>
 
               <div className={styles.card_attributes}>
                 <div className={styles.attributes} id={styles.atk}>
@@ -72,6 +81,8 @@ function CardInfo() {
             </div>
           </div>
         ))}
+
+      {loading && <Loading />}
     </div>
   );
 }

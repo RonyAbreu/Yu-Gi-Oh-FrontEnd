@@ -6,19 +6,10 @@ interface FilterProps {
 }
 
 function Filter({ setBaseUrl }: FilterProps) {
-  const [level, setLevel] = useState<number | string>("");
+  const [level, setLevel] = useState("");
   const [attribute, setAttribute] = useState("");
 
-  function changeLevel(level : string){
-    const levelNumber = Number(level);
-    if(isNaN(levelNumber) || level == ""  || levelNumber > 13){
-      setLevel("");
-      return;
-    }
-    setLevel(levelNumber);
-  }
-
-  function filterCards(){
+  function filterCards(level : string, attribute : string){
     if(level != "" && attribute == ""){
       setBaseUrl(`?level=${level}`)
     } else if(level == "" && attribute != ""){
@@ -30,22 +21,38 @@ function Filter({ setBaseUrl }: FilterProps) {
     }
   }
 
+  function clearInputs(){
+    setLevel("");
+    setAttribute("");
+    filterCards("", "");
+  }
+
   return (
     <div className={styles.filter}>
       <div className={styles.filter_component}>
         <span>Level</span>
-        <input
-          type="text"
-          placeholder="Digite o level da carta"
-          value={level}
-          min={14}
-          onChange={(e) => changeLevel(e.target.value)}
-        />
+        <select name="level" onChange={(e) => setLevel(e.target.value)} value={level}>
+          <option value="">Todos</option>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+        </select>
       </div>
 
       <div className={styles.filter_component}>
         <span>Atributo</span>
-        <select name="attribute" onChange={(e) => setAttribute(e.target.value)}>
+        <select name="attribute" onChange={(e) => setAttribute(e.target.value)} value={attribute}>
           <option value="">Todos</option>
           <option value="DARK">Trevas</option>
           <option value="EARTH">Terra</option>
@@ -57,7 +64,8 @@ function Filter({ setBaseUrl }: FilterProps) {
         </select>
       </div>
 
-      <button onClick={filterCards} className={styles.filter_button}>Filtrar</button>
+      <button onClick={() => filterCards(level, attribute)} className={styles.filter_button}>Filtrar</button>
+      <button onClick={clearInputs} className={styles.filter_button} id={styles.clear_btn}>Limpar</button>
     </div>
   );
 }

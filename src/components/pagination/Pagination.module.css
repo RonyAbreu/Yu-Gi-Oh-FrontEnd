@@ -17,10 +17,26 @@
   font-size: 1em;
   font-weight: bold;
   opacity: .8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pagination button:hover {
   opacity: 1;
+}
+
+.arrow {
+  display: none;
+  height: 40px;
+  width: 40px;
+  background-color: #007bff;
+  border: none;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  opacity: .8;
+  padding: 0px 5px;
 }
 
 .pagination span {
@@ -30,4 +46,39 @@
 
 .active {
   background-color: #000;
+}
+
+@media(max-width: 700px){
+  .pagination {
+    width: 100%;
+  }
+
+  .pagination_button {
+    font-size: .8em;
+  }
+}
+
+@media(max-width: 600px){
+  .pagination_button{
+    width: 45px;
+  }
+  
+  .btn_action {
+    display: none;
+  }
+
+  .arrow {
+    display: flex;
+  }
+}
+
+@media(max-width: 450px){
+  .pagination_button {
+    font-size: .7em;
+    width: 35px;
+  }
+
+  .arrow {
+    width: 30px;
+  }
 }

@@ -13,6 +13,8 @@
   align-items: center;
   justify-content: center;
   gap: 2em;
+  text-align: center;
+  padding: 5px;
 }
 
 .home_main {
@@ -80,5 +82,40 @@
   .home_data {
     width: 100%;
     display: flex;
+  }
+}
+
+@media(max-width: 700px){
+  .home{
+    padding: 0.5em;
+  }
+
+  .home_main {
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
+  }
+}
+
+@media(max-width: 420px){
+  .home_header h1{
+    font-size: 1.5em;
+  }
+
+  .container_cards {
+    justify-content: space-evenly;
+    gap: .3em;
+  }
+
+  .card_data img{
+    width: 160px;
+    height: 240px;
+  }
+}
+
+@media(max-width: 360px){
+  .card_data img{
+    width: 140px;
+    height: 220px;
   }
 }

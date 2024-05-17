@@ -5,7 +5,7 @@ function Footer() {
     <div className={styles.footer}>
       <div className={styles.footer_container}>
         <div className={styles.footer_column}>
-          <h2>Links Úteis</h2>
+          <h2>:Links Úteis</h2>
           <ul>
             <li>
               <a target="_blank" href="https://ygoprodeck.com/api-guide/">
@@ -15,7 +15,7 @@ function Footer() {
           </ul>
         </div>
         <div className={styles.footer_column}>
-          <h2>Redes Sociais</h2>
+          <h2>:Redes Sociais</h2>
           <ul>
             <li>
               <a
@@ -33,7 +33,7 @@ function Footer() {
           </ul>
         </div>
         <div className={styles.footer_column}>
-          <h2>Informações</h2>
+          <h2>:Informações</h2>
           <p>Desenvolvido por Rony Dev</p>
           <p>React & TypeScript</p>
           <p>Email: ronyelison78@gmail.com</p>

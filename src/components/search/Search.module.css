@@ -34,3 +34,42 @@
     background-color: #fff;
     color: #000;
 }
+
+.btn_search {
+    width: 35px;
+    height: 35px;
+    color: #fff;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #000;
+    cursor: pointer;
+    transition: .3s;
+    padding: 5px;
+    display: none;
+    margin-left: -40px;
+}
+
+@media(max-width: 600px){
+    .search{
+        width: 100%;
+        gap: .4em;
+    }
+
+    .search input{
+        width: 95%;
+    }
+
+    .search button{
+        display: none;
+    }
+
+    .btn_search {
+        display: flex;
+    }
+}
+
+@media(max-width: 400px){
+    .search input{
+        font-size: 1em;
+    }
+}

@@ -1,3 +1,8 @@
+import {
+  BsArrowLeft,
+  BsArrowRight,
+  BsFillFileEarmarkArrowUpFill,
+} from "react-icons/bs";
 import styles from "./Pagination.module.css";
 
 interface PaginationProps {
@@ -13,9 +18,8 @@ function Pagination({
   setCurrentPage,
   setLoading,
 }: PaginationProps) {
-  const calculatePages = () => {
+  const calculatePages = (maxPagesToShow: number) => {
     const pageButtons = [];
-    const maxPagesToShow = 5;
     const halfMaxPages = Math.floor(maxPagesToShow / 2);
     let startPage = 0;
     let endPage = 0;
@@ -65,22 +69,28 @@ function Pagination({
   return (
     <div className={styles.pagination}>
       {currentPage > 0 && (
-        <button
-          className={styles.pagination_button}
-          onClick={() => handleClick(0)}
-        >
-          Primeira
-        </button>
+        <div>
+          <button
+            className={styles.pagination_button + " " + styles.btn_action}
+            onClick={() => handleClick(0)}
+          >
+            Primeira
+          </button>
+          <BsArrowLeft className={styles.arrow} onClick={() => handleClick(0)}/>
+        </div>
       )}
-      {calculatePages()}
+      {calculatePages(5)}
       {currentPage < quantPages - 1 && <span>...</span>}
       {currentPage < quantPages - 1 && (
-        <button
-          className={styles.pagination_button}
-          onClick={() => handleClick(quantPages - 1)}
-        >
-          Última
-        </button>
+        <div>
+          <button
+            className={styles.pagination_button + " " + styles.btn_action}
+            onClick={() => handleClick(quantPages - 1)}
+          >
+            Última
+          </button>
+          <BsArrowRight className={styles.arrow} onClick={() => handleClick(quantPages - 1)}/>
+        </div>
       )}
     </div>
   );
