@@ -76,7 +76,7 @@ function Home() {
           {!loading && cards && cards.length > 0 && (
             <div className={styles.container_cards}>
               {currentItens.map((card: Card) => (
-                <div key={card.id} className={styles.card_data} onClick={() => navigate(`/card/${card.id}`)}>
+                <div key={card.id} className={styles.card_data} onClick={() => navigate(`/card/${card.name}`)}>
                   <img
                     src={card.card_images[0].image_url_small}
                     alt="card-image"
