@@ -20,6 +20,14 @@ function CardInfo() {
   const [isCartMenu, setMenu] = useState(false);
 
   useEffect(() => {
+    if (isCartMenu) {
+      document.body.classList.add(styles.no_scroll);
+    } else {
+      document.body.classList.remove(styles.no_scroll);
+    }
+  }, [isCartMenu]);
+
+  useEffect(() => {
     async function getCard() {
       try {
         setLoading(true);
@@ -57,13 +65,14 @@ function CardInfo() {
   function handleBuyCard(card: Card, quantity: number) {
     let cardPrice: number = card.card_prices[0].amazon_price;
 
-    if (cardPrice === 0) {
+    if (cardPrice == 0) {
       cardPrice = 1.5;
     }
 
     const subtotal: number = cardPrice * quantity;
 
     const cartItem: CartItem = {
+      id: card.id,
       name: card.name,
       image_url: card.card_images[0].image_url_small,
       price: cardPrice,
@@ -71,8 +80,20 @@ function CardInfo() {
       subtotal: subtotal,
     };
 
-    setCartItens((prevCartItens) => [...prevCartItens, cartItem]);
-    setCountItens(countItens + 1);
+    setCartItens((prevCartItens) => {
+      const itemIndex = prevCartItens.findIndex((item) => item.id === card.id);
+      if (itemIndex !== -1) {
+        const updatedCart = [...prevCartItens];
+        updatedCart[itemIndex].quantity += quantity;
+        updatedCart[itemIndex].subtotal += subtotal;
+        return updatedCart;
+      } else {
+        return [...prevCartItens, cartItem];
+      }
+    });
+
+    setCountItens(countItens + quantity);
+
     setTimeout(() => {
       setMenu(true);
     }, 200);
@@ -131,7 +152,7 @@ function CardInfo() {
               <div className={styles.card_value}>
                 <p>
                   R$
-                  {card.card_prices[0].amazon_price === 0
+                  {card.card_prices[0].amazon_price == 0
                     ? 1.5
                     : card.card_prices[0].amazon_price}
                 </p>

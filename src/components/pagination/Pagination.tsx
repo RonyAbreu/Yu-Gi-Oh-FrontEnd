@@ -1,7 +1,6 @@
 import {
   BsArrowLeft,
   BsArrowRight,
-  BsFillFileEarmarkArrowUpFill,
 } from "react-icons/bs";
 import styles from "./Pagination.module.css";
 
