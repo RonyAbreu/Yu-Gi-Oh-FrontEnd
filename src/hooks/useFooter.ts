@@ -6,12 +6,16 @@ export const useFooter = () => {
   const path = useLocation();
 
   useEffect(() => {
-    if (path.pathname.includes("cart")) {
+    if (isPathNotValidForFooter()) {
       setFooter(false);
     } else {
       setFooter(true);
     }
   }, [path.pathname]);
+
+  function isPathNotValidForFooter(): boolean {
+    return path.pathname.includes("cart") || path.pathname.includes("card");
+  }
 
   return isFooter;
 };

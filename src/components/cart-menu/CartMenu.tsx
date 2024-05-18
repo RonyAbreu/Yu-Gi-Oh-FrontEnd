@@ -23,8 +23,8 @@ function CartMenu({ setMenu }: CartMenuProps) {
   }, [cartItens, subtotal]);
 
   function showCart(){
-    navigate("/cart");
     setMenu(false);
+    navigate("/cart");
   }
 
   return (
@@ -68,7 +68,7 @@ function CartMenu({ setMenu }: CartMenuProps) {
         </div>
 
         <div className={styles.container_show_cart}>
-          <p>Subtotal: R${subtotal}</p>
+          <p>Subtotal: R${Number(subtotal).toFixed(2)}</p>
           <button className={styles.btn_show_cart} onClick={showCart}>Ver carrinho</button>
         </div>
       </div>

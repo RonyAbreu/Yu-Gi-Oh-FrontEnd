@@ -1,3 +1,130 @@
 .container_cart {
-    
+  padding: 20px;
+  display: flex;
+  gap: 1em;
+}
+
+.cart {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #ffffffe2;
+  padding: 20px;
+  border-radius: 5px;
+  color: #000;
+}
+
+.cart h1 {
+  text-align: left;
+}
+
+.cart_data {
+  border-top: 1px solid #333;
+  padding-top: 20px;
+}
+
+.cart_item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  padding: 10px 0;
+  gap: 1em;
+}
+
+.cart_item_info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+  font-weight: bold;
+}
+
+.cart_item_btn {
+  cursor: pointer;
+  font-size: 1.5em;
+  color: red;
+}
+
+.cart_summary {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+
+.container_itens_info {
+  height: 100%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  background-color: #ffffffe2;
+  border-radius: 5px;
+  padding: 20px;
+  color: #000;
+}
+
+.itens_info {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: .5em;
+}
+
+.itens_info span {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.1em;
+}
+
+.itens_info input, 
+.itens_info select {
+  width: 100%;
+  height: 35px;
+  padding: 7px;
+  font-size: 1em;
+}
+
+.itens_info button {
+  width: 100%;
+  height: 35px;
+  background-color: #000;
+  border: none;
+  cursor: pointer;
+  transition: .2s;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  opacity: .9;
+}
+
+.itens_info button:hover,
+.payment_button:hover {
+  opacity: 1;
+}
+
+.total_value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid #848484;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.payment_button {
+  width: 100%;
+  height: 35px;
+  background-color: green;
+  border: none;
+  cursor: pointer;
+  transition: .2s;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  opacity: .9;
 }

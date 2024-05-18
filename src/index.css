@@ -5,6 +5,10 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.no_scroll {
+    overflow: hidden;
+}
+
 body {
     background-color: #565175;
     color: #ffffff;

@@ -3,13 +3,13 @@ import styles from "./CardInfo.module.css";
 import { ReactElement, useEffect, useState } from "react";
 import { Card } from "../../types/card";
 import { apiFetch } from "../../axios/config";
-import { FaBuyNLarge, FaStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import Loading from "../../components/loading/Loading";
 import { CartItem } from "../../types/CartItem";
 import { useCart } from "../../hooks/useCart";
 import CartMenu from "../../components/cart-menu/CartMenu";
-import { GiBuyCard } from "react-icons/gi";
-import { BiCart, BiMoney } from "react-icons/bi";
+import { BiCart } from "react-icons/bi";
+import { useMenuCart } from "../../hooks/useMenuCart";
 
 function CardInfo() {
   const { name } = useParams();
@@ -19,15 +19,7 @@ function CardInfo() {
 
   const { countItens, setCountItens, setCartItens } = useCart();
 
-  const [isCartMenu, setMenu] = useState(false);
-
-  useEffect(() => {
-    if (isCartMenu) {
-      document.body.classList.add(styles.no_scroll);
-    } else {
-      document.body.classList.remove(styles.no_scroll);
-    }
-  }, [isCartMenu]);
+  const {isCartMenu, setMenu} = useMenuCart();
 
   useEffect(() => {
     async function getCard() {
@@ -96,9 +88,7 @@ function CardInfo() {
 
     setCountItens(countItens + quantity);
 
-    setTimeout(() => {
-      setMenu(true);
-    }, 200);
+    setMenu(true);
   }
 
   return (
