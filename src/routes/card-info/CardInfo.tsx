@@ -5,12 +5,19 @@ import { Card } from "../../types/card";
 import { apiFetch } from "../../axios/config";
 import { FaStar } from "react-icons/fa";
 import Loading from "../../components/loading/Loading";
+import { CartItem } from "../../types/CartItem";
+import { useCart } from "../../hooks/useCart";
+import CartMenu from "../../components/cart-menu/CartMenu";
 
 function CardInfo() {
   const { name } = useParams();
 
   const [cards, setCards] = useState<Card[]>();
   const [loading, setLoading] = useState<boolean>(false);
+
+  const { countItens, setCountItens, setCartItens } = useCart();
+
+  const [isCartMenu, setMenu] = useState(false);
 
   useEffect(() => {
     async function getCard() {
@@ -27,7 +34,7 @@ function CardInfo() {
     }
 
     getCard();
-  }, []);
+  }, [name]);
 
   function showStars(level: number): ReactElement[] {
     const arrayStar: ReactElement[] = [];
@@ -44,10 +51,32 @@ function CardInfo() {
   };
 
   const decreaseQuantity = () => {
-    setQuantity((prevQuantity) =>
-      prevQuantity > 1 ? prevQuantity - 1 : 1
-    );
+    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   };
+
+  function handleBuyCard(card: Card, quantity: number) {
+    let cardPrice: number = card.card_prices[0].amazon_price;
+
+    if (cardPrice === 0) {
+      cardPrice = 1.5;
+    }
+
+    const subtotal: number = cardPrice * quantity;
+
+    const cartItem: CartItem = {
+      name: card.name,
+      image_url: card.card_images[0].image_url_small,
+      price: cardPrice,
+      quantity: quantity,
+      subtotal: subtotal,
+    };
+
+    setCartItens((prevCartItens) => [...prevCartItens, cartItem]);
+    setCountItens(countItens + 1);
+    setTimeout(() => {
+      setMenu(true);
+    }, 200);
+  }
 
   return (
     <div className={styles.container_card}>
@@ -85,13 +114,13 @@ function CardInfo() {
               </div>
 
               <div className={styles.card_attributes}>
-                {(card.atk || card.atk == 0) && (
+                {(card.atk || card.atk === 0) && (
                   <div className={styles.attributes} id={styles.atk}>
                     <span>Atk</span>
                     <p>{card.atk}</p>
                   </div>
                 )}
-                {(card.def || card.def == 0) && (
+                {(card.def || card.def === 0) && (
                   <div className={styles.attributes} id={styles.def}>
                     <span>Def</span>
                     <p>{card.def}</p>
@@ -100,7 +129,12 @@ function CardInfo() {
               </div>
 
               <div className={styles.card_value}>
-                <p>R${card.card_prices[0].amazon_price == 0 ? 1.50 : card.card_prices[0].amazon_price}</p>
+                <p>
+                  R$
+                  {card.card_prices[0].amazon_price === 0
+                    ? 1.5
+                    : card.card_prices[0].amazon_price}
+                </p>
                 <div className={styles.quantity_control}>
                   <button type="button" onClick={decreaseQuantity}>
                     -
@@ -116,12 +150,18 @@ function CardInfo() {
                     +
                   </button>
                 </div>
-                <button className={styles.buy_button}>Comprar</button>
+                <button
+                  className={styles.buy_button}
+                  onClick={() => handleBuyCard(card, quantity)}
+                >
+                  Comprar
+                </button>
               </div>
             </div>
           </div>
         ))}
 
+      {isCartMenu && <CartMenu setMenu={setMenu} />}
       {loading && <Loading />}
     </div>
   );

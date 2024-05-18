@@ -2,12 +2,13 @@ import styles from "./NavBar.module.css";
 import YuGiOhImg from "../../assets/yugioh-logo.png";
 import { useNavigate } from "react-router-dom";
 import { BiCart } from "react-icons/bi";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CartMenu from "../cart-menu/CartMenu";
+import { CartContext } from "../../context/CartContext";
 
 function NavBar() {
   const navigate = useNavigate();
-  const [countItens, setCountItens] = useState(0);
+  const cartProvider = useContext(CartContext);
 
   const [isMenu, setMenu] = useState(false);
 
@@ -31,7 +32,7 @@ function NavBar() {
 
       <div className={styles.container_cart} onClick={() => setMenu(true)}>
         <BiCart className={styles.cart} />
-        <span className={styles.count_itens}>{countItens}</span>
+        <span className={styles.count_itens}>{cartProvider?.countItens}</span>
       </div>
 
       {isMenu && <CartMenu setMenu={setMenu}/>}
