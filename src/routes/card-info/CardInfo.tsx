@@ -3,11 +3,13 @@ import styles from "./CardInfo.module.css";
 import { ReactElement, useEffect, useState } from "react";
 import { Card } from "../../types/card";
 import { apiFetch } from "../../axios/config";
-import { FaStar } from "react-icons/fa";
+import { FaBuyNLarge, FaStar } from "react-icons/fa";
 import Loading from "../../components/loading/Loading";
 import { CartItem } from "../../types/CartItem";
 import { useCart } from "../../hooks/useCart";
 import CartMenu from "../../components/cart-menu/CartMenu";
+import { GiBuyCard } from "react-icons/gi";
+import { BiCart, BiMoney } from "react-icons/bi";
 
 function CardInfo() {
   const { name } = useParams();
@@ -177,6 +179,10 @@ function CardInfo() {
                 >
                   Comprar
                 </button>
+                <BiCart
+                  className={styles.buy_button_cart}
+                  onClick={() => handleBuyCard(card, quantity)}
+                />
               </div>
             </div>
           </div>
