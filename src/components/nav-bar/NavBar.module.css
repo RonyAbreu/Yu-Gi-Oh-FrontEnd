@@ -6,11 +6,31 @@
   background-color: #000;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 1em 3em;
   margin-bottom: 1em;
   position: relative;
   height: 120px;
+}
+
+.btn_home {
+  font-size: 1.8em;
+  display: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn_home:hover {
+  color: rgb(3, 3, 193);
+}
+
+.nav_bar h2 {
+  cursor: pointer;
+  transition: .2s;
+}
+
+.nav_bar h2:hover {
+  color: rgb(3, 3, 193);
 }
 
 .nav_bar img {
@@ -20,15 +40,17 @@
 }
 
 .container_cart {
-  position: absolute;
-  top: 40px;
-  right: 30px;
   cursor: pointer;
+  position: relative;
 }
 
 .cart {
   font-size: 2.5em;
-  position: relative;
+  transition: .2s;
+}
+
+.cart:hover {
+  color: rgb(3, 3, 193);
 }
 
 .count_itens {
@@ -45,4 +67,27 @@
   justify-content: center;
   top: -8px;
   right: -8px;
+}
+
+@media(max-width: 550px){
+  .nav_bar {
+    padding: 1em;
+  }
+
+  .nav_bar h2 {
+    display: none;
+  }
+  
+  .btn_home{
+    display: block;
+  }
+
+  .nav_bar img {
+    width: 160px;
+    height: 50px;
+  }
+
+  .cart {
+    font-size: 2em;
+  }
 }

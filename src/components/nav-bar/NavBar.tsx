@@ -5,6 +5,7 @@ import { BiCart } from "react-icons/bi";
 import { useContext, useEffect, useState } from "react";
 import CartMenu from "../cart-menu/CartMenu";
 import { CartContext } from "../../context/CartContext";
+import { BsHouse } from "react-icons/bs";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -22,6 +23,9 @@ function NavBar() {
 
   return (
     <div className={styles.nav_bar}>
+      <h2 onClick={() => navigate("/")}>Home</h2>
+      <BsHouse className={styles.btn_home} onClick={() => navigate("/")}/>
+
       <img
         src={YuGiOhImg}
         alt="yugioh-logo"

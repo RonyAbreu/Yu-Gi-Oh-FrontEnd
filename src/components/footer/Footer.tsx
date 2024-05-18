@@ -12,6 +12,11 @@ function Footer() {
                 Yu-Gi-Oh API
               </a>
             </li>
+            <li>
+              <a target="_blank" href="https://github.com/RonyAbreu/Yu-Gi-Oh-Shop">
+                Repositório
+              </a>
+            </li>
           </ul>
         </div>
         <div className={styles.footer_column}>

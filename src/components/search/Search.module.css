@@ -1,75 +1,75 @@
-.search{
-    width: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5em;
-    margin-bottom: 2em;
+.search {
+  width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5em;
+  margin-bottom: 2em;
 }
 
-.search input{
-    width: 400px;
-    height: 35px;
-    padding: 8px;
-    font-size: 1.1em;
-    border-radius: 5px;
-    border: none;
-    outline: none;
+.search input {
+  width: 400px;
+  height: 35px;
+  padding: 8px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  border: none;
+  outline: none;
 }
 
-.search button{
-    width: 80px;
-    height: 35px;
-    border-radius: 5px;
-    border: none;
-    background-color: #000;
-    color: #fff;
-    font-weight: bold;
-    font-size: 1em;
-    cursor: pointer;
-    transition: .3s;
+.search button {
+  width: 80px;
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.search button:hover{
-    background-color: #fff;
-    color: #000;
+.search button:hover {
+  background-color: #fff;
+  color: #000;
 }
 
 .btn_search {
-    width: 35px;
-    height: 35px;
-    color: #fff;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
-    background-color: #000;
-    cursor: pointer;
-    transition: .3s;
-    padding: 5px;
+  width: 35px;
+  height: 35px;
+  color: #fff;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #000;
+  cursor: pointer;
+  transition: 0.3s;
+  padding: 5px;
+  display: none;
+  margin-left: -40px;
+}
+
+@media (max-width: 600px) {
+  .search {
+    width: 100%;
+    gap: 0.4em;
+  }
+
+  .search input {
+    width: 95%;
+  }
+
+  .search button {
     display: none;
-    margin-left: -40px;
+  }
+
+  .btn_search {
+    display: flex;
+  }
 }
 
-@media(max-width: 600px){
-    .search{
-        width: 100%;
-        gap: .4em;
-    }
-
-    .search input{
-        width: 95%;
-    }
-
-    .search button{
-        display: none;
-    }
-
-    .btn_search {
-        display: flex;
-    }
-}
-
-@media(max-width: 400px){
-    .search input{
-        font-size: 1em;
-    }
+@media (max-width: 400px) {
+  .search input {
+    font-size: 1em;
+  }
 }

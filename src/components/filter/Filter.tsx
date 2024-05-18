@@ -53,7 +53,10 @@ function Filter({ setBaseUrl }: FilterProps) {
         <span>Level</span>
         <select
           name="level"
-          onChange={(e) => setLevel(e.target.value)}
+          onChange={(e) => {
+            setLevel(e.target.value);
+            filterCards(e.target.value, attribute, type);
+          }}
           value={level}
         >
           <option value="">Todos</option>
@@ -68,7 +71,10 @@ function Filter({ setBaseUrl }: FilterProps) {
         <select
           name="type"
           value={type}
-          onChange={(e) => setType(e.target.value)}
+          onChange={(e) => {
+            setType(e.target.value);
+            filterCards(level, attribute, e.target.value);
+          }}
         >
           <option value="">Todos</option>
           {generateOptionTypes()}
@@ -79,7 +85,10 @@ function Filter({ setBaseUrl }: FilterProps) {
         <span>Atributo</span>
         <select
           name="attribute"
-          onChange={(e) => setAttribute(e.target.value)}
+          onChange={(e) => {
+            setAttribute(e.target.value);
+            filterCards(level, e.target.value, type);
+          }}
           value={attribute}
         >
           <option value="">Todos</option>
@@ -87,12 +96,6 @@ function Filter({ setBaseUrl }: FilterProps) {
         </select>
       </div>
 
-      <button
-        onClick={() => filterCards(level, attribute, type)}
-        className={styles.filter_button}
-      >
-        Filtrar
-      </button>
       <button
         onClick={clearInputs}
         className={styles.filter_button}
