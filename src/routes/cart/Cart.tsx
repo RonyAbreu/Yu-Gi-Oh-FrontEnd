@@ -2,7 +2,9 @@ import styles from './Cart.module.css'
 
 function Cart() {
   return (
-    <div>Cart</div>
+    <div className={styles.container_cart}>
+      <h1>ok</h1>
+    </div>
   )
 }
 

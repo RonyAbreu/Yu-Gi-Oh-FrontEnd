@@ -2,6 +2,7 @@ import { BiTrash } from "react-icons/bi";
 import { useCart } from "../../hooks/useCart";
 import styles from "./CartMenu.module.css";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface CartMenuProps {
   setMenu: (isMenu: boolean) => void;
@@ -11,6 +12,8 @@ function CartMenu({ setMenu }: CartMenuProps) {
   const { cartItens, removeItem } = useCart();
   const [subtotal, setSubTotal] = useState(0);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     let total: number = 0;
     cartItens.map((item) => {
@@ -18,6 +21,11 @@ function CartMenu({ setMenu }: CartMenuProps) {
     });
     setSubTotal(total);
   }, [cartItens, subtotal]);
+
+  function showCart(){
+    navigate("/cart");
+    setMenu(false);
+  }
 
   return (
     <div className={styles.container_cart}>
@@ -49,7 +57,6 @@ function CartMenu({ setMenu }: CartMenuProps) {
                   <BiTrash
                     onClick={() => {
                       removeItem(cartItem.id);
-                      showSubTotal();
                     }}
                   />
                 </div>
@@ -62,7 +69,7 @@ function CartMenu({ setMenu }: CartMenuProps) {
 
         <div className={styles.container_show_cart}>
           <p>Subtotal: R${subtotal}</p>
-          <button className={styles.btn_show_cart}>Ver carrinho</button>
+          <button className={styles.btn_show_cart} onClick={showCart}>Ver carrinho</button>
         </div>
       </div>
     </div>
