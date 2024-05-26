@@ -2,15 +2,20 @@ import { useState } from "react";
 import styles from "./Filter.module.css";
 import { CardType } from "../../enum/CardType";
 import { CardAttribute } from "../../enum/CardAttribute";
+import { Card } from './../../types/card';
 
 interface FilterProps {
   setBaseUrl: (baseUrl: string) => void;
+  setCards: (cards: Card[]) => void;
+  cards: Card[];
 }
 
-function Filter({ setBaseUrl }: FilterProps) {
+function Filter({ setBaseUrl, setCards, cards }: FilterProps) {
   const [level, setLevel] = useState("");
   const [attribute, setAttribute] = useState("");
   const [type, setType] = useState("");
+
+  const [priceOrder, setPriceOrder] = useState("");
 
   function filterCards(level: string, attribute: string, type: string) {
     const params = new URLSearchParams();
@@ -32,6 +37,7 @@ function Filter({ setBaseUrl }: FilterProps) {
     setLevel("");
     setAttribute("");
     setType("");
+    setPriceOrder("");
     filterCards("", "", "");
   }
 
@@ -45,6 +51,24 @@ function Filter({ setBaseUrl }: FilterProps) {
     return Object.entries(CardAttribute).map(([key, value]) => (
       <option key={key} value={key}>{value}</option>
     ));
+  }
+
+  function orderCardsByPrice(order: string) {
+    const sortedCards = [...cards].sort((cardA, cardB) => {
+      const priceA = cardA.card_prices[0].amazon_price || 1.50;
+      const priceB = cardB.card_prices[0].amazon_price || 1.50;
+
+      if (order === "Crescente") {
+        return priceA - priceB;
+      } else if (order === "Decrescente") {
+        return priceB - priceA;
+      } else {
+        setBaseUrl(" ");
+        return 0;
+      }
+    });
+
+    setCards(sortedCards);
   }
 
   return (
@@ -93,6 +117,22 @@ function Filter({ setBaseUrl }: FilterProps) {
         >
           <option value="">Todos</option>
           {generateAttributeOptions()}
+        </select>
+      </div>
+
+      <div className={styles.filter_component}>
+        <span>Preço (Utilize por último)</span>
+        <select
+          name="price"
+          onChange={(e) => {
+            setPriceOrder(e.target.value);
+            orderCardsByPrice(e.target.value);
+          }}
+          value={priceOrder}
+        >
+          <option value="">Normal</option>
+          <option value="Crescente">Crescente</option>
+          <option value="Decrescente">Decrescente</option>
         </select>
       </div>
 

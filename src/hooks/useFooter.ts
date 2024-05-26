@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 export const useFooter = () => {
   const [isFooter, setFooter] = useState(true);
   const path = useLocation();
+  console.log(path.pathname)
 
   useEffect(() => {
     if (isPathNotValidForFooter()) {
@@ -13,8 +14,10 @@ export const useFooter = () => {
     }
   }, [path.pathname]);
 
+  const invalidPaths: string[] = ["cart", "card", "checkout"]
+
   function isPathNotValidForFooter(): boolean {
-    return path.pathname.includes("cart") || path.pathname.includes("card");
+    return invalidPaths.some(pathname => path.pathname.includes(pathname));
   }
 
   return isFooter;

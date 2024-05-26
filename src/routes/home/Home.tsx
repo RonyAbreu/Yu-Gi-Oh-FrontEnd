@@ -44,10 +44,10 @@ function Home() {
   
   async function searchCard(cardName: string) {
     let searchUrl: string;
-    if(baseUrl != ""){
+    if(baseUrl !== ""){
       searchUrl = baseUrl.concat("&");
     } else {
-      searchUrl = baseUrl.concat("?");
+      searchUrl = "?";
     }
 
     try {
@@ -70,7 +70,7 @@ function Home() {
       </div>
 
       <div className={styles.home_main}>
-        <Filter setBaseUrl={setBaseUrl}/>
+        <Filter setBaseUrl={setBaseUrl} setCards={setCards} cards={cards}/>
 
         <div className={styles.home_data}>
           {!loading && cards && cards.length > 0 && (

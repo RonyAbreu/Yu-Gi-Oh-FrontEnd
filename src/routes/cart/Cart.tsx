@@ -2,12 +2,25 @@ import { BiTrash } from "react-icons/bi";
 import { useCart } from "../../hooks/useCart";
 import styles from "./Cart.module.css";
 import { useEffect, useState } from "react";
+import { useValidCep } from "../../hooks/useValidCep";
+import { useNavigate } from "react-router-dom";
+
+type Cep = {
+  cep: string;
+};
 
 function Cart() {
   const { cartItens, removeItem } = useCart();
   const [subtotal, setSubTotal] = useState(0);
+  const { register, handleSubmit, errors } = useValidCep();
 
-  const [cep, setCep] = useState<number|string>("");
+  const [total, setTotal] = useState(0);
+
+  const [cepIsValid, setCepIsValid] = useState(true);
+
+  const [coupon, setCoupon] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     let total: number = 0;
@@ -17,17 +30,41 @@ function Cart() {
     setSubTotal(total);
   }, [cartItens]);
 
-  function calculateCep() {}
+  function calculateCep({ cep }: Cep) {
+    setTotal(0);
 
-  function changeCep(cep: string) {
-    const cepValid: number = Number(cep);
+    const cepPercent = 10;
+    if (isValidCep(cep)) {
+      setCepIsValid(true);
+      setTotal(subtotal + cepPercent);
+    } else {
+      setCepIsValid(false);
+    }
+  }
 
-    if(isNaN(cepValid) || cep == ""){
-      setCep("")
-      return;
+  function isValidCep(cep: string): boolean {
+    // Expressão regular para verificar o formato do CEP
+    const cepRegex = /^[0-9]{5}-?[0-9]{3}$/;
+
+    if (!cepRegex.test(cep)) {
+      return false;
     }
 
-    setCep(cepValid);
+    const cleanCep = cep.replace("-", "");
+
+    if (cleanCep.length !== 8) {
+      return false;
+    }
+
+    return true;
+  }
+
+  function showCheckout(){
+    if(cartItens && cartItens.length > 0){
+      navigate("/checkout")
+    } else {
+      alert("Insira algo no carrinho antes de prosseguir para o pagamento!")
+    }
   }
 
   return (
@@ -67,23 +104,32 @@ function Cart() {
       </div>
 
       <div className={styles.container_itens_info}>
-        <label className={styles.itens_info}>
+        <form
+          className={styles.itens_info}
+          onSubmit={handleSubmit(calculateCep)}
+        >
           <span>CEP</span>
           <input
             type="text"
             placeholder="Digite seu CEP"
-            name="cep"
-            value={cep}
-            onChange={(e) => changeCep(e.target.value)}
+            {...register("cep")}
             maxLength={8}
+            id="inputCep"
           />
-          <span></span>
-          <button onClick={calculateCep}>Calcular Frete</button>
-        </label>
+          <span id={styles.errors}>{errors.cep?.message}</span>
+          {!cepIsValid && <span id={styles.errors}>Cep inválido</span>}
+          <button type="submit" id="btnCep">
+            Calcular Frete
+          </button>
+        </form>
 
         <label className={styles.itens_info}>
           <span>Cupom</span>
-          <select name="cupom">
+          <select
+            name="cupom"
+            value={coupon}
+            onChange={(e) => setCoupon(e.target.value)}
+          >
             <option value="">Vazio</option>
             <option value="FG">Frete Grátis</option>
             <option value="DESC">10% de Desconto</option>
@@ -93,10 +139,15 @@ function Cart() {
 
         <div className={styles.total_value}>
           <p>Total</p>
-          <p>R${Number(subtotal).toFixed(2)}</p>
+          <p>
+            R$
+            {total == 0
+              ? Number(subtotal).toFixed(2)
+              : Number(total).toFixed(2)}
+          </p>
         </div>
 
-        <button className={styles.payment_button}>
+        <button className={styles.payment_button} onClick={showCheckout}>
           Continuar para pagamento
         </button>
       </div>
