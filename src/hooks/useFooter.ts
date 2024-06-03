@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 export const useFooter = () => {
   const [isFooter, setFooter] = useState(true);
   const path = useLocation();
-  console.log(path.pathname)
 
   useEffect(() => {
     if (isPathNotValidForFooter()) {

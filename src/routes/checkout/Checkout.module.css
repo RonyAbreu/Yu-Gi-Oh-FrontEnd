@@ -1,15 +1,21 @@
-.checkout {
+.checkout_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1em;
+  padding: 20px;
+}
+
+.checkout{
+  width: 1200px;
   display: flex;
   align-items: start;
-  justify-content: center;
-  gap: 3em;
+  justify-content: space-between;
+  gap: 1em;
 }
 
 .checkout_column {
-    
-}
-
-.address {
+  width: 33%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,18 +26,98 @@
   border-radius: 5px;
 }
 
-.address h2 {
+.title {
   margin-bottom: 1em;
 }
 
 .address_form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 5px;
+}
+
+.address_form label {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+.address_form label span {
+  font-weight: bold;
+}
+
+.address_form label input {
+  height: 30px;
+  padding: 5px;
+  font-size: .9em;
+}
+
+.checkout_items {
   display: flex;
   flex-direction: column;
   gap: 1em;
 }
 
-.address_form label {
+.item {
+  display: flex;
+  gap: .5em;
+  padding-bottom: 7px;
+  border-bottom: 1px solid #000;
+}
+
+.item_info {
   display: flex;
   flex-direction: column;
-  gap: 0.3em;
+  gap: .3em;
+}
+
+.item_info h3 {
+  font-size: 1.2em;
+}
+
+.payments_methods {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: .3em;
+  margin-bottom: 1em;
+}
+
+.payment {
+  display: flex;
+  gap: .3em;
+}
+
+.payment input,
+.payment label {
+  cursor: pointer;
+}
+
+.total{
+  width: 100%;
+  border: 2px solid #333;
+  padding: 8px;
+  margin-bottom: 1.2em;
+  display: flex;
+  justify-content: end;
+  font-weight: bold;
+}
+
+.btn_payment {
+  width: 100%;
+  height: 50px;
+  background-color: rgb(17, 127, 17);
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2em;
+  border: none;
+  cursor: pointer;
+  transition: .2s ease-in-out;
+}
+
+.btn_payment:hover {
+  background-color: rgb(17, 127, 17, 0.9);;
 }
