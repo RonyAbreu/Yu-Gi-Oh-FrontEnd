@@ -1,0 +1,37 @@
+.checkout {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 3em;
+}
+
+.checkout_column {
+    
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffffe2;
+  padding: 20px;
+  color: #000;
+  border-radius: 5px;
+}
+
+.address h2 {
+  margin-bottom: 1em;
+}
+
+.address_form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.address_form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
