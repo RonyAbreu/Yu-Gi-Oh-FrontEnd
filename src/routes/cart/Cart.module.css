@@ -132,4 +132,32 @@
   text-transform: uppercase;
   font-size: 1.1em;
   opacity: .9;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media(max-width: 1250px) {
+  .payment_button {
+    height: 45px;
+    
+  }
+}
+
+@media(max-width: 1000px) {
+  .container_cart {
+    flex-direction: column-reverse;
+  }
+
+  .cart,
+  .container_itens_info {
+    width: 100%;
+  }
+}
+
+@media(max-width: 550px) {
+  .cart h1 {
+    text-align: center;
+  }
 }

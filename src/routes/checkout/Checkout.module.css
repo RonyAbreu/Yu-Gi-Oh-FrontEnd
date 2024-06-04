@@ -30,6 +30,7 @@
   margin-bottom: 1em;
   border-bottom: 1px solid #000;
   padding-bottom: 2px;
+  text-align: center;
 }
 
 .address_form {
@@ -127,4 +128,31 @@
 
 .btn_payment:hover {
   background-color: rgb(17, 127, 17, 0.9);;
+}
+
+@media(max-width: 900px) {
+  .total {
+    justify-content: center;
+  }
+
+  .checkout {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .checkout_column {
+    width: 80%;
+  }
+}
+
+@media(max-width: 550px) {
+  .checkout_container {
+    padding: 10px;
+  }
+  
+  .checkout_column {
+    width: 90%;
+  }
 }
