@@ -8,6 +8,7 @@ import CardInfo from "./routes/card-info/CardInfo.tsx";
 import { CartProvider } from "./context/CartContext.tsx";
 import Cart from "./routes/cart/Cart.tsx";
 import Checkout from "./routes/checkout/Checkout.tsx";
+import OrderReview from "./routes/order-review/OrderReview.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/card/:name" element={<CardInfo />} />
             <Route path="/cart" element={<Cart />}/>
             <Route path="/checkout" element={<Checkout />}/>
+            <Route path="/review" element={<OrderReview />}/>
           </Route>
         </Routes>
       </BrowserRouter>

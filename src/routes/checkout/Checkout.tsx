@@ -18,8 +18,8 @@ function Checkout() {
     setSubTotal(total);
   }, [cartItens]);
 
-  function finalizeOrder(address: Address) {
-    console.log(address);
+  function finalizeOrder(data : Address) {
+    console.log(data);
   }
 
   return (
@@ -58,7 +58,7 @@ function Checkout() {
                 placeholder="Digite o nome de sua rua"
                 {...register("street")}
               />
-              <span>{errors.street?.message}</span>
+              <span className={styles.error}>{errors.street?.message}</span>
             </label>
             <label>
               <p>Bairro</p>
@@ -67,7 +67,7 @@ function Checkout() {
                 placeholder="Digite o nome de seu bairro"
                 {...register("burgh")}
               />
-              <span>{errors.burgh?.message}</span>
+              <span className={styles.error}>{errors.burgh?.message}</span>
             </label>
             <label>
               <p>Número da Casa</p>
@@ -77,7 +77,7 @@ function Checkout() {
                 placeholder="Digite o número de sua casa"
                 {...register("number")}
               />
-              <span>{errors.number?.message}</span>
+              <span className={styles.error}>{errors.number?.message}</span>
             </label>
             <label>
               <p>Cidade</p>
@@ -86,7 +86,7 @@ function Checkout() {
                 placeholder="Digite o nome de sua cidade"
                 {...register("city")}
               />
-              <span>{errors.city?.message}</span>
+              <span className={styles.error}>{errors.city?.message}</span>
             </label>
             <label>
               <p>Estado</p>
@@ -95,7 +95,7 @@ function Checkout() {
                 placeholder="Digite o nome do seu estado"
                 {...register("state")}
               />
-              <span>{errors.state?.message}</span>
+              <span className={styles.error}>{errors.state?.message}</span>
             </label>
           </form>
         </div>
@@ -104,17 +104,18 @@ function Checkout() {
           <h2 className={styles.title}>Forma de Pagamento</h2>
           <div className={styles.payments_methods}>
             <div className={styles.payment}>
-              <input type="radio" name="payment" id="pix" />
+              <input type="radio" id="pix" value="pix" {...register("payment")} />
               <label htmlFor="pix">PIX</label>
             </div>
             <div className={styles.payment}>
-              <input type="radio" name="payment" id="ticket" />
+              <input type="radio" id="ticket" value="ticket" {...register("payment")} />
               <label htmlFor="ticket">Boleto</label>
             </div>
             <div className={styles.payment}>
-              <input type="radio" name="payment" id="card" />
+              <input type="radio" id="card" value="card" {...register("payment")} />
               <label htmlFor="card">Cartão</label>
             </div>
+            <span className={styles.error}>{errors.payment?.message}</span>
           </div>
 
           <div className={styles.total}>

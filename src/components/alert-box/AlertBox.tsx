@@ -1,6 +1,5 @@
 import { BsCheckCircleFill, BsXCircleFill } from 'react-icons/bs';
 import styles from './AlertBox.module.css';
-import { MouseEventHandler } from 'react';
 
 type AlertProps = {
     title: string;

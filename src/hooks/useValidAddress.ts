@@ -31,6 +31,10 @@ export const useValidAddress = () => {
       .required("Campo obrigatório")
       .min(3, "Mínimo de 3 caracteres")
       .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/, "Digite apenas letras"),
+
+    payment: yup
+      .string()
+      .required("Selecione uma forma de pagamento")
   });
 
   const {
