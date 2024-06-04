@@ -2,7 +2,7 @@ import Search from "../../components/search/Search";
 import styles from "./Home.module.css";
 import { apiFetch } from "../../axios/config";
 import { useEffect, useState } from "react";
-import { Card } from "../../types/card";
+import { Card } from "../../types/Card";
 import Filter from "../../components/filter/Filter";
 import Loading from "../../components/loading/Loading";
 import Pagination from "../../components/pagination/Pagination";
