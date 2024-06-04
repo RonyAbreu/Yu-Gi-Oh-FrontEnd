@@ -4,6 +4,7 @@ import styles from "./Cart.module.css";
 import { useEffect, useState } from "react";
 import { useValidCep } from "../../hooks/useValidCep";
 import { useNavigate } from "react-router-dom";
+import AlertBox from "../../components/alert-box/AlertBox";
 
 type Cep = {
   cep: string;
@@ -13,6 +14,7 @@ function Cart() {
   const { cartItens, removeItem } = useCart();
   const [subtotal, setSubTotal] = useState(0);
   const { register, handleSubmit, errors } = useValidCep();
+  const [alertBox, setAlertBox] = useState(false);
 
   const [total, setTotal] = useState(0);
 
@@ -59,13 +61,22 @@ function Cart() {
     return true;
   }
 
-  function showCheckout(){
-    if(cartItens && cartItens.length > 0){
-      navigate("/checkout")
+  function showCheckout() {
+    if (cartItens && cartItens.length > 0) {
+      navigate("/checkout");
     } else {
-      alert("Insira algo no carrinho antes de prosseguir para o pagamento!")
+      setAlertBox(true);
     }
   }
+
+  if (alertBox)
+    return (
+      <AlertBox
+        title={"Insira algo no carrinho antes de prosseguir para o pagamento!"}
+        isFail={true}
+        onclickFunction={setAlertBox(false)}
+      />
+    );
 
   return (
     <div className={styles.container_cart}>
@@ -125,15 +136,13 @@ function Cart() {
 
         <label className={styles.itens_info}>
           <span>Cupom</span>
-          <select
+          <input
+            type="text"
             name="cupom"
             value={coupon}
             onChange={(e) => setCoupon(e.target.value)}
-          >
-            <option value="">Vazio</option>
-            <option value="FG">Frete Grátis</option>
-            <option value="DESC">10% de Desconto</option>
-          </select>
+            placeholder="Digite seu cupom"
+          />
           <button>Aplicar cupom</button>
         </label>
 
