@@ -18,7 +18,6 @@ function Search({searchCard} : SearchProps) {
           setCardName(e.target.value);
           searchCard(e.target.value);
         }}
-        onKeyDown={(e) => e.key === "Enter" ? searchCard(cardName) : ""}
       />
     </div>
   );
