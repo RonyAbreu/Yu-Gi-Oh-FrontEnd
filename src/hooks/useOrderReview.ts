@@ -1,9 +1,10 @@
-import { useState } from "react"
-import { OrderDetail } from "../types/OrderDetail";
+import { useContext } from "react";
+import { OrderReviewContext } from "../context/OrderReviewContext";
 
 export const useOrderReview = () => {
-
-    const [orderDetails, setOrderDetails] = useState<OrderDetail | null>(null);
-
-    return {orderDetails, setOrderDetails}
-}
+    const context = useContext(OrderReviewContext);
+    if (context === undefined) {
+      throw new Error("Erro nos detalhes do pedido");
+    }
+    return context;
+};

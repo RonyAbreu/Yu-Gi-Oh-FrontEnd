@@ -2,8 +2,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-export const useValidAddress = () => {
+export const useValidOrderDetails = () => {
   const schema = yup.object({
+    email : yup
+    .string()
+    .email("Email inválido")
+    .required("Campo obrigatório"),
+
     street: yup
       .string()
       .required("Campo obrigatório")

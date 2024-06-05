@@ -1,17 +1,17 @@
 import styles from "./Checkout.module.css";
 import { useCart } from "../../hooks/useCart";
 import { useState, useEffect } from "react";
-import { useValidAddress } from "../../hooks/useValidAddress";
 import { OrderDetail } from "../../types/OrderDetail";
 import { useOrderReview } from "../../hooks/useOrderReview";
 import { useNavigate } from "react-router-dom";
+import { useValidOrderDetails } from "../../hooks/useValidOrderDetails";
 
 function Checkout() {
   const { cartItens } = useCart();
-  const [subtotal, setSubTotal] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
   const navigate = useNavigate();
 
-  const { register, handleSubmit, errors } = useValidAddress();
+  const { register, handleSubmit, errors } = useValidOrderDetails();
 
   const { setOrderDetails } = useOrderReview();
 
@@ -20,10 +20,11 @@ function Checkout() {
     cartItens.map((item) => {
       total += item.subtotal;
     });
-    setSubTotal(total);
+    setTotal(total);
   }, [cartItens]);
 
   function finalizeOrder(orderDetail : OrderDetail) {
+    orderDetail.totalValue = total;
     setOrderDetails(orderDetail);
     navigate("/review");
   }
@@ -57,6 +58,15 @@ function Checkout() {
         <div className={styles.checkout_column}>
           <h2 className={styles.title}>Endereço</h2>
           <form className={styles.address_form}>
+          <label>
+              <p>Email</p>
+              <input
+                type="email"
+                placeholder="Digite o seu email"
+                {...register("email")}
+              />
+              <span className={styles.error}>{errors.email?.message}</span>
+            </label>
             <label>
               <p>Rua</p>
               <input
@@ -114,18 +124,18 @@ function Checkout() {
               <label htmlFor="pix">PIX</label>
             </div>
             <div className={styles.payment}>
-              <input type="radio" id="ticket" value="ticket" {...register("payment")} />
+              <input type="radio" id="ticket" value="boleto" {...register("payment")} />
               <label htmlFor="ticket">Boleto</label>
             </div>
             <div className={styles.payment}>
-              <input type="radio" id="card" value="card" {...register("payment")} />
+              <input type="radio" id="card" value="cartão" {...register("payment")} />
               <label htmlFor="card">Cartão</label>
             </div>
             <span className={styles.error}>{errors.payment?.message}</span>
           </div>
 
           <div className={styles.total}>
-            <span>Total R${subtotal.toFixed(2)}</span>
+            <span>Total R${total.toFixed(2)}</span>
           </div>
 
           <button

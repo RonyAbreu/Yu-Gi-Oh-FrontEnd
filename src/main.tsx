@@ -8,22 +8,25 @@ import CardInfo from "./routes/card-info/CardInfo.tsx";
 import { CartProvider } from "./context/CartContext.tsx";
 import Cart from "./routes/cart/Cart.tsx";
 import Checkout from "./routes/checkout/Checkout.tsx";
-import OrderReview from "./routes/order-review/OrderReview.tsx";
+import OrderReview from "./routes/order-review/PurchaseReview.tsx";
+import { OrderReviewProvider } from "./context/OrderReviewContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <CartProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route index path="/" element={<Home />} />
-            <Route path="/card/:name" element={<CardInfo />} />
-            <Route path="/cart" element={<Cart />}/>
-            <Route path="/checkout" element={<Checkout />}/>
-            <Route path="/review" element={<OrderReview />}/>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <OrderReviewProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />}>
+              <Route index path="/" element={<Home />} />
+              <Route path="/card/:name" element={<CardInfo />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/review" element={<OrderReview />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </OrderReviewProvider>
     </CartProvider>
   </React.StrictMode>
 );
