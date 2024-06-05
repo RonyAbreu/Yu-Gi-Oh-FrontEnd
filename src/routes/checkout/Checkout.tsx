@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useValidOrderDetails } from "../../hooks/useValidOrderDetails";
 
 function Checkout() {
-  const { cartItens } = useCart();
+  const { cartItens, setCartItens, setCountItens } = useCart();
   const [total, setTotal] = useState<number>(0);
   const navigate = useNavigate();
 
@@ -26,6 +26,8 @@ function Checkout() {
   function finalizeOrder(orderDetail : OrderDetail) {
     orderDetail.totalValue = total;
     setOrderDetails(orderDetail);
+    setCartItens([]);
+    setCountItens(0);
     navigate("/review");
   }
 

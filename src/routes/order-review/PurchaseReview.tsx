@@ -23,7 +23,7 @@ function PurchaseReview() {
 
         <div className={styles.details}>
           <h3>Informações do pedido</h3>
-          <p>Total: {orderDetails?.totalValue}</p>
+          <p>Total: {orderDetails?.totalValue + "R$"}</p>
           <p>Rua: {orderDetails?.street}</p>
           <p>Bairro: {orderDetails?.burgh}</p>
           <p>Número da casa: {orderDetails?.number}</p>
