@@ -7,6 +7,7 @@
     flex-direction: column;
     gap: 1em;
     min-width: 250px;
+    z-index: 2;
 }
 
 .filter_component{
@@ -63,6 +64,19 @@
 
 @media(max-width: 720px){
     .filter {
-        width: 100%;
+        display: none;
+        justify-content: center;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+        padding: 15px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    .filter_component {
+        border: 1px solid #000;
     }
 }

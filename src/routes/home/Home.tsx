@@ -7,6 +7,7 @@ import Loading from "../../components/loading/Loading";
 import Pagination from "../../components/pagination/Pagination";
 import { useNavigate } from "react-router-dom";
 import { Card } from "../../types/Card";
+import { BsCaretRightSquareFill } from "react-icons/bs";
 
 function Home() {
   const [cards, setCards] = useState<Card[] | []>([]);
@@ -55,6 +56,17 @@ function Home() {
     }
   }
 
+  function showFilter() {
+    const filterComponent = document.getElementById("filter");
+    const filterDisplay = filterComponent!.style.display;
+
+    if(filterDisplay == "flex"){
+      filterComponent!.style.display = "none"
+    } else {
+      filterComponent!.style.display = "flex"
+    }
+  }
+
   return (
     <div className={styles.home}>
       <div className={styles.home_header}>
@@ -63,7 +75,8 @@ function Home() {
       </div>
 
       <div className={styles.home_main}>
-        <Filter setBaseUrl={setBaseUrl} setCards={setCards} cards={cards}/>
+        <Filter setBaseUrl={setBaseUrl} setCards={setCards} cards={cards} />
+        <BsCaretRightSquareFill className={styles.btn_filter} onClick={showFilter}/>
 
         <div className={styles.home_data}>
           {!loading && cards && cards.length > 0 && (

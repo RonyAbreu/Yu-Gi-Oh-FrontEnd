@@ -72,7 +72,7 @@ function Filter({ setBaseUrl, setCards, cards }: FilterProps) {
   }
 
   return (
-    <div className={styles.filter}>
+    <div className={styles.filter} id="filter">
       <div className={styles.filter_component}>
         <span>Level</span>
         <select
