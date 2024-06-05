@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./Filter.module.css";
 import { CardType } from "../../enum/CardType";
 import { CardAttribute } from "../../enum/CardAttribute";
-import { Card } from '../../types/Card';
+import { Card } from "../../types/Card";
 
 interface FilterProps {
   setBaseUrl: (baseUrl: string) => void;

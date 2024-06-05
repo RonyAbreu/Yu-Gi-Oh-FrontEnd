@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import styles from "./CardInfo.module.css";
 import { ReactElement, useEffect, useState } from "react";
-import { Card } from "../../types/Card";
 import { apiFetch } from "../../axios/config";
 import { FaStar } from "react-icons/fa";
 import Loading from "../../components/loading/Loading";
@@ -10,6 +9,7 @@ import { useCart } from "../../hooks/useCart";
 import CartMenu from "../../components/cart-menu/CartMenu";
 import { BiCart } from "react-icons/bi";
 import { useMenuCart } from "../../hooks/useMenuCart";
+import { Card } from "../../types/Card";
 
 function CardInfo() {
   const { name } = useParams();
