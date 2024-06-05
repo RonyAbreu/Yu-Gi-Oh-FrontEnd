@@ -44,10 +44,12 @@ function Home() {
   
   async function searchCard(cardName: string) {
     let searchUrl: string;
-    if(baseUrl !== ""){
-      searchUrl = baseUrl.concat("&");
+    if(baseUrl == " "){
+      searchUrl = baseUrl.concat("?");
+      console.log(searchUrl+ "fname="+ cardName)
     } else {
-      searchUrl = "?";
+      searchUrl = baseUrl.concat("");
+      console.log(searchUrl+ "fname="+ cardName)
     }
 
     try {
