@@ -29,7 +29,7 @@ export const useValidAddress = () => {
     state: yup
       .string()
       .required("Campo obrigatório")
-      .min(3, "Mínimo de 3 caracteres")
+      .min(2, "Mínimo de 2 caracteres")
       .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/, "Digite apenas letras"),
 
     payment: yup

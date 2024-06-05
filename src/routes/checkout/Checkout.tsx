@@ -2,13 +2,18 @@ import styles from "./Checkout.module.css";
 import { useCart } from "../../hooks/useCart";
 import { useState, useEffect } from "react";
 import { useValidAddress } from "../../hooks/useValidAddress";
-import { Address } from "../../types/Address";
+import { OrderDetail } from "../../types/OrderDetail";
+import { useOrderReview } from "../../hooks/useOrderReview";
+import { useNavigate } from "react-router-dom";
 
 function Checkout() {
   const { cartItens } = useCart();
   const [subtotal, setSubTotal] = useState<number>(0);
+  const navigate = useNavigate();
 
   const { register, handleSubmit, errors } = useValidAddress();
+
+  const { setOrderDetails } = useOrderReview();
 
   useEffect(() => {
     let total: number = 0;
@@ -18,8 +23,9 @@ function Checkout() {
     setSubTotal(total);
   }, [cartItens]);
 
-  function finalizeOrder(data : Address) {
-    console.log(data);
+  function finalizeOrder(orderDetail : OrderDetail) {
+    setOrderDetails(orderDetail);
+    navigate("/review");
   }
 
   return (

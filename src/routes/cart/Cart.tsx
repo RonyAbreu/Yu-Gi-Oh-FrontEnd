@@ -74,6 +74,7 @@ function Cart() {
       <AlertBox
         title={"Insira algo no carrinho antes de prosseguir para o pagamento!"}
         isFail={true}
+        onclickFunction={() => setAlertBox(false)}
       />
     );
 
