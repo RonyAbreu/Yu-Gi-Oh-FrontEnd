@@ -19,6 +19,7 @@ function Cart() {
   const [total, setTotal] = useState(0);
 
   const [cepIsValid, setCepIsValid] = useState(true);
+  const [cep, setCep] = useState("");
 
   const [coupon, setCoupon] = useState("");
 
@@ -34,6 +35,7 @@ function Cart() {
 
   function calculateCep({ cep }: Cep) {
     setTotal(0);
+    setCep(cep)
 
     const cepPercent = 10;
     if (isValidCep(cep)) {
@@ -62,10 +64,12 @@ function Cart() {
   }
 
   function showCheckout() {
-    if (cartItens && cartItens.length > 0) {
+    if (cartItens && cartItens.length > 0 && isValidCep(cep)) {
       navigate("/checkout");
-    } else {
+    } else if(cartItens && cartItens.length == 0) {
       setAlertBox(true);
+    } else {
+      setCepIsValid(false);
     }
   }
 
@@ -156,7 +160,7 @@ function Cart() {
           </p>
         </div>
 
-        <button className={styles.payment_button} onClick={showCheckout}>
+        <button className={styles.payment_button} onClick={handleSubmit(showCheckout)}>
           Continuar para pagamento
         </button>
       </div>
