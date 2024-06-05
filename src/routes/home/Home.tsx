@@ -43,18 +43,9 @@ function Home() {
   }, [baseUrl]);
   
   async function searchCard(cardName: string) {
-    let searchUrl: string;
-    if(baseUrl == " "){
-      searchUrl = baseUrl.concat("?");
-      console.log(searchUrl+ "fname="+ cardName)
-    } else {
-      searchUrl = baseUrl.concat("");
-      console.log(searchUrl+ "fname="+ cardName)
-    }
-
     try {
       setLoading(true);
-      const response = await apiFetch.get(`${searchUrl}fname=${cardName}`);
+      const response = await apiFetch.get(`?fname=${cardName}`);
       const cardsJson = response.data.data;
       setCards(cardsJson);
     } catch (error) {
