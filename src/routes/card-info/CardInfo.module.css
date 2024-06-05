@@ -162,6 +162,8 @@
 }
 
 .quantity_control button {
+  width: 40px;
+  height: 40px;
   background-color: #593595;
   color: #fff;
   border: none;
@@ -232,6 +234,7 @@
 
 @media (max-width: 950px) {
   .card_info {
+    width: 100%;
     flex-direction: column;
   }
 }
@@ -256,6 +259,10 @@
 }
 
 @media (max-width: 550px) {
+  .card_data {
+    padding: 10px;
+  }
+
   .card_value{
     gap: 1em;
   }
@@ -265,7 +272,7 @@
   }
 
   .quantity_control button {
-    width: 25px;
+    width: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
